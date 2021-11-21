@@ -1,0 +1,36 @@
+wordlists (0.3-1kali3) kali-dev; urgency=medium
+
+  * Add dependents to kali-defaults
+
+ -- Ben Wilson <g0tmi1k@kali.org>  Wed, 17 Jul 2019 10:59:21 +0100
+
+wordlists (0.3-1kali2) kali-dev; urgency=medium
+
+  * Add helper-script
+  * Add seclists
+
+ -- Ben Wilson <g0tmi1k@kali.org>  Fri, 21 Jun 2019 19:22:49 +0100
+
+wordlists (0.3-1kali1) kali; urgency=low
+
+  * Added postinst and prerm scripts to make links to other wordlists
+
+ -- Devon Kearns <dookie@kali.org>  Wed, 03 Jul 2013 13:52:49 -0600
+
+wordlists (0.3-1kali0) kali; urgency=low
+
+  * Imported new version
+
+ -- Devon Kearns <dookie@kali.org>  Sun, 03 Mar 2013 06:13:46 -0700
+
+wordlists (0.2-1kali0) kali; urgency=low
+
+  * Imported new version
+
+ -- Devon Kearns <dookie@kali.org>  Mon, 25 Feb 2013 16:21:42 -0700
+
+wordlists (0.1-1kali0) kali; urgency=low
+
+  * Initial release
+
+ -- Devon Kearns <dookie@kali.org>  Mon, 28 Jan 2013 13:16:48 -0700

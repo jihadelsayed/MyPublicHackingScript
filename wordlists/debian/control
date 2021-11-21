@@ -1,0 +1,20 @@
+Source: wordlists
+Section: utils
+Priority: optional
+Maintainer: Kali Developers <devel@kali.org>
+Uploaders: Ben Wilson <g0tmi1k@kali.org>
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 3.9.3
+Homepage: https://www.kali.org
+Vcs-Git: https://gitlab.com/kalilinux/packages/wordlists.git
+Vcs-Browser: https://gitlab.com/kalilinux/packages/wordlists
+
+Package: wordlists
+Architecture: all
+Depends: kali-defaults (>= 2019.3.6),
+            ${misc:Depends},
+Description: Contains the rockyou wordlist
+ This package contains the rockyou.txt
+ wordlist and has an installation size
+ of 134 MB.
+P
