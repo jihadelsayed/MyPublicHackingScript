@@ -68,8 +68,3 @@ except:
   sys.exit(0)
 string += 100 * "A"
 time.sleep(1)
-
-# captain --| hacker
-# first mate --| ai
-# quartermaster --| pc or linux 
-# sailing masters --| 
