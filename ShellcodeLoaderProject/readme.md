@@ -12,7 +12,7 @@ This project provides tools to:
 ```
 /your-folder
 |-- encrypt_shellcode.py
-|-- decrypt_run.cpp
+|-- decrypt_run_from_bin.cpp
 |-- key.json
 |-- encrypted_shellcode.bin
 |-- nlohmann/json.hpp (single header JSON parser)
@@ -76,7 +76,7 @@ python encrypt_shellcode.py
 If using **cl.exe (Visual Studio)**:
 
 ```bash
-cl decrypt_run.cpp /I"path\to\json\include" /I"path\to\cryptopp\include" /link /LIBPATH:"path\to\cryptopp\lib" cryptlib.lib
+cl decrypt_run_from_bin.cpp /I"path\to\json\include" /I"path\to\cryptopp\include" /link /LIBPATH:"path\to\cryptopp\lib" cryptlib.lib
 ```
 
 If using **g++ (MSYS2 MinGW64)**:
@@ -84,7 +84,7 @@ If using **g++ (MSYS2 MinGW64)**:
 ```bash
 cd /c/path/to/your/project
 
-g++ decrypt_run.cpp -o decrypt_run.exe -I. -I/mingw64/include -L/mingw64/lib -lcryptopp -static
+g++ decrypt_run_from_bin.cpp -o decrypt_run_from_bin.exe -I. -I/mingw64/include -L/mingw64/lib -lcryptopp -static
 ```
 
 ---
@@ -92,7 +92,7 @@ g++ decrypt_run.cpp -o decrypt_run.exe -I. -I/mingw64/include -L/mingw64/lib -lc
 ### 5. Run Your Loader
 
 ```bash
-./decrypt_run.exe
+./decrypt_run_from_bin.exe
 ```
 
 - It will:

